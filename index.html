@@ -113,10 +113,11 @@
   }
   .app-icon {
     width: 84px; height: 84px; border-radius: 19px; flex-shrink: 0;
-    background: var(--gold-soft); border: 1px solid #d4a84333;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 38px;
+    overflow: hidden; border: 1px solid #d4a84333;
+    box-shadow: 0 10px 30px #00000060;
   }
+  .app-icon img { width: 100%; height: 100%; display: block; }
+  .app-card + .app-card { margin-top: 22px; }
   .app-body { flex: 1; min-width: 260px; }
   .app-body h3 { font-size: 22px; font-weight: 650; margin-bottom: 4px; }
   .badge {
@@ -216,7 +217,7 @@
   <div class="wrap">
     <h2>Apps</h2>
     <div class="app-card">
-      <div class="app-icon">🎙️</div>
+      <div class="app-icon"><img src="icon-speechreelcut.png" alt="Speech Reelcut app icon"></div>
       <div class="app-body">
         <h3>Speech Reelcut</h3>
         <span class="badge">Coming soon to the Mac App Store</span>
@@ -231,7 +232,24 @@
         </div>
       </div>
     </div>
-    <p class="soon-note">More tools for voice-driven storytelling are in development.</p>
+
+    <div class="app-card">
+      <div class="app-icon"><img src="icon-speedcontactsheet.png" alt="Speed Contact Sheet app icon"></div>
+      <div class="app-body">
+        <h3>Speed Contact Sheet</h3>
+        <span class="badge">Coming soon to the Mac App Store</span>
+        <p>The fastest way to cull thousands of photos. Rate with stars and
+        colors at full speed — keyboard or even a game controller — while
+        everything saves to standard XMP sidecar files that work with
+        professional photo workflows. Your files are never moved or modified.</p>
+        <div class="app-links">
+          <a href="speedcontactsheet/privacy.html">Privacy</a>
+          <a href="speedcontactsheet/support.html">Support</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="soon-note">More tools for visual storytellers are in development.</p>
   </div>
 </section>
 
