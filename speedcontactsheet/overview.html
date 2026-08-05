@@ -1,244 +1,276 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Speed Contact Sheet — Fast, Human-Driven Photo Culling for Mac</title>
-<meta name="description" content="Speed Contact Sheet is a macOS photo culling app in development. Rate thousands of RAW or JPEG photos with stars and colors at full speed using the keyboard or a game controller. Non-destructive XMP sidecars — your originals are never touched.">
-<meta name="keywords" content="photo culling app, fast photo culling Mac, RAW culling software, cull wedding photos fast, XMP sidecar rating app, game controller photo culling, macOS photo selection app, manual photo culling, Corona Apps, Speed Contact Sheet">
-<link rel="canonical" href="https://luiscorona.com/speedcontactsheet/overview.html">
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="Speed Contact Sheet — Fast, Human-Driven Photo Culling for Mac">
-<meta property="og:description" content="A macOS culling app in development: rate thousands of photos by hand at full speed — keyboard or game controller. Non-destructive XMP. Nothing uploaded.">
-<meta property="og:url" content="https://luiscorona.com/speedcontactsheet/overview.html">
-<meta property="og:image" content="https://luiscorona.com/icon-speedcontactsheet.png">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Speed Contact Sheet — Cull a whole session in minutes</title>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
   :root{
-    --bg:#0d0c0a;--bg-soft:#15130f;--card:#1b1813;
-    --gold:#d4a843;--gold-soft:#d4a84320;--gold-line:#d4a84333;
-    --text:#ece7df;--muted:#9a958c;--faint:#6b675f;
-    --line:#ffffff12;--hairline:#ffffff0a;
-    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
-    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+    --bg:#0b0a0a; --bg2:#141210; --ink:#f4f1ea; --muted:#a8a29a;
+    --gold:#d4a843; --line:rgba(255,255,255,.09);
   }
-  html{scroll-behavior:smooth}
-  body{font-family:var(--sans);
-    background:radial-gradient(1000px 540px at 80% -10%, #d4a8430e, transparent 60%),var(--bg);
-    color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
-  a{color:var(--gold);text-decoration:none}a:hover{text-decoration:underline}
-  .wrap{max-width:820px;margin:0 auto;padding:0 26px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"SF Pro Display","SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height:1.5;letter-spacing:-.01em;overflow-x:hidden}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--gold);font-size:15px;font-weight:600;letter-spacing:.02em;margin-bottom:14px}
+  .eyebrow svg{width:17px;height:17px}
+  h1{font-size:clamp(40px,7.4vw,82px);font-weight:600;line-height:1.04;letter-spacing:-.03em}
+  h2{font-size:clamp(30px,4.6vw,54px);font-weight:600;line-height:1.08;letter-spacing:-.025em}
+  .lede{color:var(--muted);font-size:clamp(17px,2vw,21px);font-weight:400;max-width:34ch;margin:20px auto 0}
+  .band .lede,.flow-head .lede,.diag .lede{margin-left:0;margin-right:0}
+  img{max-width:100%;display:block}
+  svg{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 
-  nav{position:sticky;top:0;z-index:20;background:#0d0c0ad9;backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--hairline)}
-  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:1000px}
-  .logo{font-weight:600;font-size:15px;color:var(--text)}.logo span{color:var(--gold)}
-  nav .links a{color:var(--muted);font-size:13.5px;margin-left:24px;transition:color .2s}
-  nav .links a:hover{color:var(--gold);text-decoration:none}
+  nav{position:sticky;top:0;z-index:20;background:rgba(11,10,10,.72);backdrop-filter:saturate(160%) blur(18px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:54px}
+  .brandrow{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600}
+  .navicon{width:26px;height:26px;border-radius:7px}
+  .navcta{font-size:14px;color:#1a1509;background:var(--gold);padding:7px 15px;border-radius:980px;text-decoration:none;font-weight:600}
 
-  header{padding:62px 0 30px;text-align:center;border-bottom:1px solid var(--hairline)}
-  header img.appicon{width:88px;height:88px;border-radius:20px;border:1px solid var(--gold-line);
-    box-shadow:0 12px 34px #00000070}
-  .tagline{color:var(--gold);font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-    font-size:12px;margin-top:16px}
-  h1{font-family:var(--serif);font-size:clamp(28px,4.4vw,38px);font-weight:600;
-    line-height:1.2;margin:14px 0 10px;letter-spacing:-.01em}
-  .lede{color:var(--muted);font-size:18px;max-width:660px;margin:12px auto 0}
-  .badge{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-size:11.5px;
-    font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);
-    background:var(--gold-soft);border:1px solid var(--gold-line);border-radius:99px;padding:6px 15px}
-  .dot{width:7px;height:7px;border-radius:99px;background:var(--gold)}
+  .hero{text-align:center;padding:88px 0 40px}
+  .heroicon{width:92px;height:92px;border-radius:21px;margin:0 auto 22px;box-shadow:0 14px 44px rgba(0,0,0,.55)}
+  .cta{display:inline-flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:980px;font-size:16px;font-weight:500;text-decoration:none;transition:.15s}
+  .btn.primary{background:var(--gold);color:#1a1509;font-weight:600}
+  .btn.primary:hover{filter:brightness(1.06)}
+  .btn.ghost{color:var(--ink);border:1px solid var(--line)}
+  .btn.ghost:hover{border-color:rgba(255,255,255,.28)}
+  .btn svg{width:18px;height:18px;stroke:none;fill:currentColor}
 
-  h2{font-family:var(--serif);font-size:24px;font-weight:600;margin:48px 0 10px;letter-spacing:-.01em}
-  h3{font-size:16.5px;margin:24px 0 6px;color:var(--gold)}
-  p{margin:10px 0;color:var(--text)}
-  main p{color:#d8d3ca}
-  ul{margin:10px 0;padding-left:22px}li{margin:6px 0;color:#d8d3ca}
-  strong{color:var(--text)}
+  .frame{border-radius:16px;border:1px solid var(--line);box-shadow:0 26px 70px rgba(0,0,0,.55);overflow:hidden}
+  .hero .frame{margin:56px auto 0;max-width:1000px}
 
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
-  .ftcard{background:linear-gradient(150deg,var(--card),var(--bg-soft));
-    border:1px solid var(--line);border-radius:15px;padding:17px 19px}
-  .ftcard h3{margin:0 0 4px;color:var(--gold)}
-  .ftcard p{margin:0;color:var(--muted);font-size:14.5px}
+  .flow-head{text-align:center;margin-bottom:46px}
+  .flow{display:flex;align-items:flex-start;justify-content:center;flex-wrap:wrap;position:relative}
+  .step{width:176px;text-align:center;position:relative;padding:0 6px}
+  .puck{width:76px;height:76px;margin:0 auto 16px;border-radius:20px;background:var(--bg2);border:1px solid var(--line);display:grid;place-items:center;color:var(--gold)}
+  .puck svg{width:32px;height:32px}
+  .puck img{width:42px;height:42px;border-radius:11px}
+  .step h4{font-size:16px;font-weight:600;margin-bottom:4px}
+  .step p{font-size:13.5px;color:var(--muted);line-height:1.4}
+  .num{position:absolute;top:-6px;right:38px;width:20px;height:20px;border-radius:50%;background:var(--gold);color:#1a1509;font-size:11px;font-weight:700;display:grid;place-items:center;border:0;stroke:none}
+  .conn{width:34px;height:1px;background:var(--line);margin-top:38px;position:relative;overflow:hidden}
+  .conn::after{content:"";position:absolute;top:0;left:-40%;width:40%;height:100%;background:var(--gold);animation:slide 2.6s linear infinite}
+  @keyframes slide{to{left:110%}}
+  @media(max-width:760px){.conn{display:none}.flow{gap:26px}}
 
-  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14.5px}
-  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
-  th{color:var(--gold);font-weight:600}td:first-child{color:var(--text);font-weight:600;width:38%}
-  kbd{background:#000;border:1px solid var(--line);border-radius:6px;padding:1px 7px;font-size:13px;color:var(--gold)}
+  section{padding:88px 0;border-top:1px solid var(--line)}
+  .band{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .band.rev .copy{order:2}
+  .inputs{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+  .chip{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--ink);border:1px solid var(--line);border-radius:980px;padding:8px 14px}
+  .chip svg{width:18px;height:18px;stroke:var(--gold)}
+  @media(max-width:840px){.band{grid-template-columns:1fr;gap:34px}.band.rev .copy{order:0}}
 
-  .faq dt{font-weight:600;margin-top:18px;color:var(--text)}
-  .faq dd{margin:6px 0 0;color:var(--muted)}
-  .note{color:var(--faint);font-size:13px}
+  .devices{position:relative;padding-bottom:6%}
+  .devices .mac{width:100%;border-radius:14px;border:1px solid var(--line);box-shadow:0 26px 70px rgba(0,0,0,.55)}
+  .devices .phone{position:absolute;right:-4%;bottom:0;width:26%;min-width:150px;border-radius:26px;border:5px solid #171614;box-shadow:0 26px 60px rgba(0,0,0,.6)}
 
-  .cta{display:inline-block;background:var(--gold);color:#14110a;font-weight:600;
-    padding:12px 24px;border-radius:11px;margin:8px 10px 0 0}
-  .cta:hover{text-decoration:none;opacity:.86}
-  .cta.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold-line)}
+  .diag{text-align:center}
+  .diag svg.flowsvg{width:100%;max-width:760px;height:auto;margin:8px auto 0;stroke:none}
+  .diag .fnode{fill:var(--bg2);stroke:var(--line);stroke-width:1}
+  .diag .fico{fill:none;stroke:var(--gold);stroke-width:1.6}
+  .diag .fline{stroke:var(--gold);stroke-width:2;fill:none}
+  .diag .fdash{stroke:var(--gold);stroke-width:1.5;fill:none;stroke-dasharray:5 5}
+  .diag .ft{fill:var(--ink);font-size:16px;font-weight:600}
+  .diag .fs{fill:var(--muted);font-size:13px}
 
-  footer{margin-top:60px;border-top:1px solid var(--hairline);padding:34px 0 46px;
-    color:var(--faint);font-size:13px;text-align:center}
-  footer a{color:var(--faint)}footer a:hover{color:var(--gold)}
+  .focus{text-align:center}
+  .focus .frame{max-width:360px;margin:36px auto 0}
 
-  @media(max-width:680px){.grid{grid-template-columns:1fr}nav .links a{margin-left:14px;font-size:12.5px}}
+  .goodgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:44px}
+  @media(max-width:760px){.goodgrid{grid-template-columns:1fr}}
+  .good{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:24px 24px}
+  .good .gi{width:26px;height:26px;color:var(--gold);margin-bottom:12px}
+  .good h4{font-size:17px;font-weight:600;margin-bottom:6px}
+  .good p{font-size:15px;color:var(--muted);line-height:1.55}
+  .good b{color:var(--ink);font-weight:600}
+
+  .students{text-align:center;background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .students .si{width:34px;height:34px;color:var(--gold);margin:0 auto 14px}
+  .mailbtn{display:inline-flex;align-items:center;gap:9px;margin-top:26px;padding:13px 22px;border-radius:980px;border:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:16px}
+  .mailbtn:hover{border-color:rgba(255,255,255,.3)}
+  .mailbtn svg{width:18px;height:18px;stroke:var(--gold)}
+
+  .iconbg{position:relative;overflow:hidden}
+  .iconbg > .wrap{position:relative;z-index:1}
+  .bgicon{position:absolute;pointer-events:none;color:var(--gold);z-index:0}
+  .bgicon svg{stroke-width:.7;fill:none;width:100%;height:auto;display:block}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  .final{text-align:center;padding:104px 0}
+  footer{padding:44px 0 64px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;text-align:center}
+  footer a{color:var(--muted);text-decoration:none;margin:0 12px}
+  footer a:hover{color:var(--ink)}
 </style>
-
-<!-- ── structured data ── -->
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"SoftwareApplication",
-  "name":"Speed Contact Sheet",
-  "applicationCategory":"MultimediaApplication",
-  "applicationSubCategory":"Photo Culling & Selection",
-  "operatingSystem":"macOS",
-  "softwareVersion":"1.0 (in development)",
-  "releaseNotes":"In development. Coming to the Mac App Store.",
-  "description":"Speed Contact Sheet is a macOS photo culling application, currently in development, for photographers who select thousands of images by hand. It lets you rate photos with stars and color labels at full speed using the keyboard or a game controller, while every decision is written to standard XMP sidecar files. Your original photos are never moved or modified. It is fully human-driven, with no AI scoring and nothing uploaded.",
-  "featureList":[
-    "Star ratings (1-5) and color labels at full speed",
-    "Keyboard-driven culling with single-key shortcuts",
-    "Game controller support (Xbox, PlayStation, MFi) over Bluetooth or USB",
-    "Non-destructive XMP sidecar files compatible with Lightroom, Capture One and Bridge",
-    "RAW support: CR3, CR2, ARW, NEF, ORF, RW2, DNG and more",
-    "JPEG, HEIC, PNG and TIFF support with automatic RAW+JPG pairing",
-    "Built-in Pomodoro focus timer for long culling sessions",
-    "Histogram and full EXIF metadata panel",
-    "100% human-driven: no AI scoring, nothing uploaded"
-  ],
-  "creator":{"@type":"Organization","name":"Corona Apps",
-    "founder":{"@type":"Person","name":"Luis Corona"},
-    "url":"https://luiscorona.com","email":"hello.coronaapps@gmail.com"},
-  "url":"https://luiscorona.com/speedcontactsheet/overview.html",
-  "image":"https://luiscorona.com/icon-speedcontactsheet.png",
-  "softwareHelp":"https://luiscorona.com/speedcontactsheet/support.html",
-  "privacyPolicy":"https://luiscorona.com/speedcontactsheet/privacy.html"
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org","@type":"FAQPage",
-  "mainEntity":[
-    {"@type":"Question","name":"What is Speed Contact Sheet?","acceptedAnswer":{"@type":"Answer","text":"Speed Contact Sheet is a macOS app, currently in development, for fast, manual photo culling. Photographers use it to review thousands of RAW or JPEG images and rate them with stars and color labels at high speed, using the keyboard or a game controller. Ratings are saved to standard XMP sidecar files and your original photos are never moved or modified."}},
-    {"@type":"Question","name":"Does Speed Contact Sheet use AI to pick photos for me?","acceptedAnswer":{"@type":"Answer","text":"No. Culling is fully human-driven. You make every selection; the app's only job is to make your decisions land as fast as possible through keyboard and game-controller input. There is no AI scoring and nothing is uploaded."}},
-    {"@type":"Question","name":"Does it modify or move my original photos?","acceptedAnswer":{"@type":"Answer","text":"No. It never moves or modifies your photos. Star ratings and color labels are written to standard XMP sidecar files that work with professional photo workflows such as Adobe Lightroom, Capture One and Adobe Bridge."}},
-    {"@type":"Question","name":"Which file formats does it support?","acceptedAnswer":{"@type":"Answer","text":"RAW formats including CR3, CR2, ARW, NEF, ORF, RW2 and DNG, plus JPEG, HEIC, PNG and TIFF, with automatic RAW+JPG pairing."}},
-    {"@type":"Question","name":"Is it available yet?","acceptedAnswer":{"@type":"Answer","text":"Not yet. Speed Contact Sheet is in development and is coming to the Mac App Store. Email hello.coronaapps@gmail.com to be notified at launch."}}
-  ]
-}
-</script>
 </head>
 <body>
 
-<nav>
-  <div class="wrap">
-    <a class="logo" href="../index.html">Luis <span>Corona</span></a>
-    <div class="links">
-      <a href="../index.html">Home</a>
-      <a href="support.html">Support</a>
-      <a href="privacy.html">Privacy</a>
+<nav><div class="wrap">
+  <div class="brandrow"><img class="navicon" src="assets/appicon.png" alt=""> Speed Contact Sheet</div>
+  <a class="navcta" href="https://apps.apple.com/mx/app/speed-contact-sheet/id6785704702?l=en-GB&mt=12">Download</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <img class="heroicon" src="assets/appicon.png" alt="Speed Contact Sheet icon">
+  <div class="eyebrow">Speed Contact Sheet</div>
+  <h1>Cull a whole session<br>in minutes.</h1>
+  <p class="lede">The fastest way for photographers to rate, flag, and choose across thousands of frames — with every pick saved right next to your files.</p>
+  <div class="cta">
+    <a class="btn primary" href="https://apps.apple.com/mx/app/speed-contact-sheet/id6785704702?l=en-GB&mt=12"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M16.4 12.9c0-2.1 1.7-3.1 1.8-3.2-1-1.4-2.5-1.6-3-1.6-1.3-.1-2.5.8-3.1.8-.6 0-1.6-.8-2.7-.8-1.4 0-2.7.8-3.4 2.1-1.5 2.5-.4 6.3 1 8.3.7 1 1.5 2.1 2.6 2.1 1 0 1.4-.7 2.7-.7 1.2 0 1.6.7 2.7.7 1.1 0 1.8-1 2.5-2 .8-1.1 1.1-2.2 1.1-2.3-.1 0-2.1-.8-2.2-3.2zM14.3 6.6c.6-.7 1-1.6.9-2.6-.8 0-1.9.6-2.5 1.3-.5.6-1 1.6-.9 2.5.9.1 1.8-.5 2.5-1.2z"/></svg> Download on the Mac App Store</a>
+    <a class="btn ghost" href="https://apps.apple.com/mx/app/speed-contact-sheet/id6785704702?l=en-GB&mt=12">Also on iPhone and iPad</a>
+  </div>
+  <div class="frame"><img src="assets/shot-grid.jpg" alt="Speed Contact Sheet grid culling view"></div>
+</div></header>
+
+<section><div class="wrap reveal">
+  <div class="flow-head">
+    <div class="eyebrow"><svg viewBox="0 0 24 24"><path d="M13 3v7h6l-8 11v-7H5z"/></svg> How it works</div>
+    <h2 style="text-align:center">From the shoot to your selection.</h2>
+  </div>
+  <div class="flow">
+    <div class="step"><span class="num">1</span><div class="puck"><svg viewBox="0 0 24 24"><path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2"/><circle cx="12" cy="13" r="3"/></svg></div><h4>Shoot</h4><p>Your camera, your way</p></div>
+    <div class="conn"></div>
+    <div class="step"><span class="num">2</span><div class="puck"><svg viewBox="0 0 24 24"><path d="M7 4h8.5l4 4v11a1 1 0 0 1 -1 1h-11.5a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1z"/><path d="M10 4v3M13 4v3M16 4v3"/></svg></div><h4>Card</h4><p>Drop in a memory card</p></div>
+    <div class="conn"></div>
+    <div class="step"><span class="num">3</span><div class="puck"><img src="assets/appicon.png" alt=""></div><h4>Cull in SCS</h4><p>Rate · flag · choose, fast</p></div>
+    <div class="conn"></div>
+    <div class="step"><span class="num">4</span><div class="puck"><svg viewBox="0 0 24 24"><path d="M6.7 18a4 4 0 0 1 .5 -8 5 5 0 0 1 9.5 1.5 3.5 3.5 0 0 1 -.5 6.9z"/></svg></div><h4>Private iCloud</h4><p>Your own sync, no servers</p></div>
+    <div class="conn"></div>
+    <div class="step"><span class="num">5</span><div class="puck"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="13" height="9" rx="1"/><path d="M2 17h13"/><rect x="16.5" y="9" width="5.5" height="10" rx="1"/></svg></div><h4>Everywhere</h4><p>Mac · iPad · iPhone</p></div>
+  </div>
+</div></section>
+
+<section class="iconbg"><div class="bgicon" style="left:-2%;top:50%;transform:translateY(-50%);width:46%;opacity:.07"><svg viewBox="0 0 24 24"><path d="M2 6m0 2a2 2 0 0 1 2 -2h16a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2z"/><path d="M6 12h4m-2 -2v4"/><path d="M14.5 12h.01M17.5 12h.01M16 10.5h.01M16 13.5h.01"/></svg></div><div class="wrap reveal"><div class="band">
+  <div class="copy">
+    <div class="eyebrow"><svg viewBox="0 0 24 24"><path d="M13 3v7h6l-8 11v-7H5z"/></svg> Speed</div>
+    <h2>Thousands of frames.<br>One sitting.</h2>
+    <p class="lede">Rate with a flick — swipe, a single key, or a game controller. The fewest finger movements to a clean selection, with no importing, copying, or waiting.</p>
+    <div class="inputs">
+      <span class="chip"><svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg> Keyboard</span>
+      <span class="chip"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M6 12h4M8 10v4"/><path d="M15 11h.01M18 13h.01"/></svg> Game controller</span>
     </div>
   </div>
-</nav>
+  <div class="frame"><img src="assets/shot-controller.jpg" alt="Gamepad button mapping"></div>
+</div></div></section>
 
-<header>
-  <div class="wrap">
-    <img class="appicon" src="https://luiscorona.com/icon-speedcontactsheet.png" alt="Speed Contact Sheet app icon">
-    <div class="tagline">By Corona Apps · macOS</div>
-    <h1>The fastest way to cull thousands of photos</h1>
-    <p class="lede">A focused macOS culling app for photographers who select by hand. Rate with stars and colors at full speed — keyboard or even a game controller — while everything saves to standard XMP sidecar files. Your originals are never moved or modified.</p>
-    <div class="badge"><span class="dot"></span>In development · Coming to the Mac App Store</div>
+<section><div class="wrap reveal"><div class="band rev">
+  <div class="copy">
+    <div class="eyebrow"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="13" height="9" rx="1"/><path d="M2 17h13"/><rect x="16.5" y="9" width="5.5" height="10" rx="1"/></svg> Everywhere</div>
+    <h2>Start on your Mac.<br>Keep going on iPhone.</h2>
+    <p class="lede">Your session and your picks follow you across devices, synced through your own private iCloud — so you can keep culling on the go.</p>
   </div>
-</header>
-
-<main class="wrap">
-
-  <h2>What is Speed Contact Sheet?</h2>
-  <p><strong>Speed Contact Sheet is a macOS photo culling app</strong> built for photographers who shoot in volume — weddings, events, portraits, sports — and need to get from thousands of frames to a clean selection as quickly as possible. It is a dedicated <em>culling</em> tool, not an editor: its only job is to help you decide which photos to keep, reject or flag, and to do that faster than anything else in your workflow.</p>
-  <p>Every rating is written to a <strong>standard XMP sidecar file</strong>, so your selections flow straight into Adobe Lightroom, Capture One or Adobe Bridge. The app <strong>never moves or modifies your original photos.</strong></p>
-
-  <h2>Where culling fits in your workflow</h2>
-  <p>Culling is the first pass — the part most photographers dread. Before a single photo gets edited, someone has to look at every frame and decide what stays. On a big shoot that can mean reviewing 8,000 images one by one. Speed Contact Sheet is built for exactly that step, and nothing else. By doing one job well, it gets you to your keepers faster, then hands them off to whatever editor you already use.</p>
-
-  <h2>Who is it for?</h2>
-  <ul>
-    <li><strong>Wedding and event photographers</strong> facing 2,000–10,000 frames per job.</li>
-    <li><strong>Portrait, fashion and product shooters</strong> who burst and need to pick the sharpest frame fast.</li>
-    <li><strong>Anyone whose first culling pass feels slow</strong> and who wants a tool dedicated to selection rather than editing.</li>
-    <li><strong>Photographers who'd rather trust their own eye</strong> than have software decide for them.</li>
-  </ul>
-
-  <h2>Key features</h2>
-  <div class="grid">
-    <div class="ftcard"><h3>Full-speed rating</h3><p>Stars (1–5) and color labels with single-key shortcuts. Cull at the speed of thought.</p></div>
-    <div class="ftcard"><h3>Game controller support</h3><p>Cull with an Xbox, PlayStation or MFi controller over Bluetooth or USB. Map navigation and ratings to buttons.</p></div>
-    <div class="ftcard"><h3>Non-destructive XMP</h3><p>Ratings saved as standard XMP sidecars. Files are never moved or modified. Works with Lightroom, Capture One, Bridge.</p></div>
-    <div class="ftcard"><h3>Full RAW support</h3><p>CR3, CR2, ARW, NEF, ORF, RW2, DNG and more — plus JPEG, HEIC, PNG, TIFF and automatic RAW+JPG pairing.</p></div>
-    <div class="ftcard"><h3>Built-in Pomodoro timer</h3><p>A focus timer designed for long culling sessions, so a 10,000-photo job stays manageable.</p></div>
-    <div class="ftcard"><h3>Histogram &amp; metadata</h3><p>Live histogram and a full EXIF panel: camera, mode, white balance, shutter, aperture, ISO, lens and focal length.</p></div>
+  <div class="devices">
+    <img class="mac" src="assets/shot-mac-grid.jpg" alt="Grid on Mac">
+    <img class="phone" src="assets/shot-iphone-grid.jpg" alt="Same session on iPhone">
   </div>
+</div></div></section>
 
-  <h2>Keyboard shortcuts</h2>
-  <table>
-    <tr><th>Key</th><th>Action</th></tr>
-    <tr><td><kbd>1</kbd>–<kbd>5</kbd></td><td>Rate with 1 to 5 stars</td></tr>
-    <tr><td><kbd>0</kbd></td><td>Clear rating</td></tr>
-    <tr><td><kbd>6</kbd>–<kbd>9</kbd></td><td>Apply color labels</td></tr>
-    <tr><td><kbd>T</kbd> / <kbd>P</kbd></td><td>Tag photo</td></tr>
-    <tr><td>Arrows</td><td>Navigate between photos</td></tr>
-    <tr><td><kbd>Space</kbd></td><td>Open / close full preview</td></tr>
-    <tr><td><kbd>Z</kbd></td><td>Zoom</td></tr>
-    <tr><td><kbd>I</kbd></td><td>Toggle info panel</td></tr>
-    <tr><td>Caps Lock</td><td>Auto-advance after rating</td></tr>
-  </table>
+<section class="diag"><div class="wrap reveal">
+  <div class="eyebrow" style="justify-content:center"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0 -15.5 -2m-.5 -4v4h4"/><path d="M4 13a8 8 0 0 0 15.5 2m.5 4v-4h-4"/></svg> How your ratings travel</div>
+  <h2 style="text-align:center">Rate here. It shows up there.</h2>
+  <p class="lede" style="margin:20px auto 0;max-width:40ch">Rate a photo on one device and it appears on the others — automatically, through your own private iCloud.</p>
+  <svg class="flowsvg" viewBox="0 0 780 300" role="img" aria-label="Rate on iPhone, it travels through your private iCloud, and appears on your Mac automatically — and the same the other way.">
+    <rect x="102" y="24" width="20" height="30" rx="4" class="fico"/><line x1="108" y1="49" x2="116" y2="49" class="fico"/>
+    <path d="M373,50 a9,9 0 0,1 2,-17 12,12 0 0,1 23,3 8,8 0 0,1 0,14 z" class="fico"/>
+    <rect x="652" y="28" width="28" height="18" rx="2" class="fico"/><line x1="646" y1="52" x2="686" y2="52" class="fico"/>
+    <line x1="207" y1="120" x2="288" y2="120" class="fline"/><path d="M282,114 l8,6 l-8,6" class="fline"/>
+    <line x1="486" y1="120" x2="567" y2="120" class="fline"/><path d="M561,114 l8,6 l-8,6" class="fline"/>
+    <path d="M600,176 C505,236 270,236 134,186" class="fdash"/><path d="M140,180 l-8,7 l10,4" class="fdash"/>
+    <rect x="286" y="250" width="160" height="20" rx="4" fill="#0b0a0a" stroke="none"/>
+    <text x="366" y="264" class="fs" text-anchor="middle">and the same the other way</text>
+    <rect x="20" y="74" width="185" height="92" rx="14" class="fnode"/>
+    <text x="112" y="114" class="ft" text-anchor="middle">Rate on iPhone</text><text x="112" y="138" class="fs" text-anchor="middle">tap the stars</text>
+    <rect x="297" y="74" width="185" height="92" rx="14" class="fnode"/>
+    <text x="390" y="114" class="ft" text-anchor="middle">Your private iCloud</text><text x="390" y="138" class="fs" text-anchor="middle">carries it, privately</text>
+    <rect x="575" y="74" width="185" height="92" rx="14" class="fnode"/>
+    <text x="667" y="114" class="ft" text-anchor="middle">On your Mac</text><text x="667" y="138" class="fs" text-anchor="middle">applied automatically</text>
+  </svg>
+</div></section>
 
-  <h2>What makes it different</h2>
-  <p>Speed Contact Sheet doesn't try to be the only app you open. It does one thing — manual culling — and is shaped entirely around making that step fast and comfortable:</p>
-  <ul>
-    <li><strong>You decide, not an algorithm.</strong> Culling is fully human-driven. The app's only job is to make <em>your</em> decisions land faster — no AI guessing which shot you love, nothing uploaded to anyone.</li>
-    <li><strong>Cull from the couch with a game controller.</strong> Pair an Xbox, PlayStation or MFi controller and rate thousands of frames without hunching over a keyboard.</li>
-    <li><strong>A focus timer built for the grind.</strong> The built-in Pomodoro timer turns a punishing 8,000-photo cull into structured, repeatable sprints.</li>
-    <li><strong>Truly non-destructive.</strong> Ratings and color labels are written to standard XMP sidecars and flow straight into Lightroom, Capture One and Bridge. Your originals are never moved or modified.</li>
-    <li><strong>Apple-native and focused.</strong> Built specifically for macOS, designed to do the culling step better than anything else in your workflow.</li>
-  </ul>
+<section><div class="wrap reveal"><div class="band">
+  <div class="copy">
+    <div class="eyebrow"><svg viewBox="0 0 24 24"><path d="M6.7 18a4 4 0 0 1 .5 -8 5 5 0 0 1 9.5 1.5 3.5 3.5 0 0 1 -.5 6.9z"/></svg> Private by design</div>
+    <h2>Your photos never<br>leave your world.</h2>
+    <p class="lede">Sync runs on your own iCloud — no servers, no accounts, nothing we can see. Your originals are never moved or changed.</p>
+  </div>
+  <div class="frame"><img src="assets/shot-cloud.jpg" alt="iCloud sync settings"></div>
+</div></div></section>
 
-  <h2>Status</h2>
-  <p><strong>Speed Contact Sheet is currently in development</strong> and coming to the Mac App Store. Want to know when it's ready? Email <a href="mailto:hello.coronaapps@gmail.com">hello.coronaapps@gmail.com</a> and we'll let you know at launch.</p>
+<section><div class="wrap reveal"><div class="band rev">
+  <div class="copy">
+    <div class="eyebrow"><svg viewBox="0 0 24 24"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/></svg> Editor-ready</div>
+    <h2>Your decisions<br>land in your files.</h2>
+    <p class="lede">Ratings save as standard XMP next to each photo, ready for the editing tools you already use in your workflow.</p>
+  </div>
+  <div class="frame"><img src="assets/shot-ipad.jpg" alt="Photo with full EXIF and rating"></div>
+</div></div></section>
 
-  <h2>Frequently asked questions</h2>
-  <dl class="faq">
-    <dt>What exactly does the app do?</dt>
-    <dd>It's a dedicated culling tool for the first pass of a shoot: review thousands of frames and rate them with stars and colors at full speed, then carry those selections into your editor through standard XMP metadata.</dd>
-    <dt>Does it use AI to pick my photos?</dt>
-    <dd>No. It's fully human-driven — you make every call, and nothing is uploaded or scored by AI.</dd>
-    <dt>Will it change my original files?</dt>
-    <dd>No. Originals are never moved or modified. Ratings and color labels live in standard XMP sidecar files.</dd>
-    <dt>What formats are supported?</dt>
-    <dd>RAW (CR3, CR2, ARW, NEF, ORF, RW2, DNG and more), JPEG, HEIC, PNG and TIFF, with automatic RAW+JPG pairing.</dd>
-    <dt>Is it available yet?</dt>
-    <dd>Not yet — it's in development and coming to the Mac App Store. See <a href="../index.html">luiscorona.com</a>.</dd>
-  </dl>
+<section><div class="wrap reveal focus">
+  <div class="eyebrow" style="justify-content:center"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 13v-4M9 3h6"/></svg> Stay in the zone</div>
+  <h2>A focus timer,<br>built in.</h2>
+  <p class="lede" style="margin-left:auto;margin-right:auto">Work in focused blocks and silence distractions while you cull.</p>
+  <div class="frame"><img src="assets/shot-pomodoro.jpg" alt="Built-in focus timer"></div>
+</div></section>
 
-  <h2>About the maker</h2>
-  <p>Speed Contact Sheet is made by <strong>Corona Apps</strong>, the independent studio of <strong>Luis Corona</strong> — a wedding filmmaker who spent over a decade editing real emotion frame by frame and now builds focused macOS tools for visual storytellers. Questions, bugs or feature ideas: <a href="mailto:hello.coronaapps@gmail.com">hello.coronaapps@gmail.com</a> — every email is answered personally.</p>
+<section><div class="wrap reveal">
+  <div style="text-align:center;margin-bottom:8px">
+    <div class="eyebrow" style="justify-content:center"><svg viewBox="0 0 24 24"><path d="M5 12l-2 -2 9 -4 9 4 -2 2"/><path d="M8 13v4c0 1 2 2 4 2s4 -1 4 -2v-4"/></svg> Good to know</div>
+    <h2 style="text-align:center">The honest version.</h2>
+  </div>
+  <div class="goodgrid">
+    <div class="good">
+      <svg class="gi" viewBox="0 0 24 24"><path d="M13 3v7h6l-8 11v-7H5z"/></svg>
+      <h4>Built for the speed of rating</h4>
+      <p>Every part of the app exists to help you rate, flag, and choose faster — keyboard, game controller, burst grouping.</p>
+    </div>
+    <div class="good">
+      <svg class="gi" viewBox="0 0 24 24"><rect x="3" y="5" width="13" height="9" rx="1"/><path d="M2 17h13"/><rect x="16.5" y="9" width="5.5" height="10" rx="1"/></svg>
+      <h4>One price, all your devices</h4>
+      <p>A single subscription covers Mac, iPad, and iPhone. Start with a <b>14-day free trial</b> — no account, no card. <b>$9.99/month</b> or <b>$39.99/year</b>.</p>
+    </div>
+    <div class="good">
+      <svg class="gi" viewBox="0 0 24 24"><path d="M11.5 20.8a12 12 0 0 1 -8 -14.8a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.1 7"/><path d="M15 19l2 2l4 -4"/></svg>
+      <h4>A safety net for your ratings — not a backup</h4>
+      <p>Your ratings are kept so they can be restored to your files by identity, and they sync across your devices. This is <b>not a backup of your photos</b>: your originals are never uploaded, and sync relies on <b>your own iCloud</b>. Always keep your own backups of your originals.</p>
+    </div>
+    <div class="good">
+      <svg class="gi" viewBox="0 0 24 24"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/></svg>
+      <h4>Works with your workflow</h4>
+      <p>Ratings save as standard XMP that professional photo tools can read — nothing proprietary, nothing locked in.</p>
+    </div>
+  </div>
+</div></section>
 
-  <p style="margin-top:28px">
-    <a class="cta" href="support.html">Support &amp; FAQ</a>
-    <a class="cta ghost" href="../index.html">Back to Corona Apps</a>
-  </p>
+<section class="students iconbg"><div class="bgicon" style="left:50%;top:50%;transform:translate(-50%,-50%);width:46%;opacity:.06"><svg viewBox="0 0 24 24"><path d="M22 9l-10 -4l-10 4l10 4l10 -4v6"/><path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4"/></svg></div><div class="wrap reveal">
+  <svg class="si" viewBox="0 0 24 24"><path d="M5 12l-2 -2 9 -4 9 4 -2 2"/><path d="M8 13v4c0 1 2 2 4 2s4 -1 4 -2v-4"/><path d="M22 10v4"/></svg>
+  <h2>Students &amp; educators</h2>
+  <p class="lede" style="margin:18px auto 0">Learning photography? Email your student ID and we'll send you a discount code. Questions and feedback are always welcome too — we read every message.</p>
+  <a class="mailbtn" href="mailto:hello.coronaapps@gmail.com"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6l9 -6"/></svg> hello.coronaapps@gmail.com</a>
+</div></section>
 
-</main>
+<section class="final"><div class="wrap reveal">
+  <img class="heroicon" src="assets/appicon.png" alt="">
+  <h2>Reach your selection,<br>faster.</h2>
+  <div class="cta">
+    <a class="btn primary" href="https://apps.apple.com/mx/app/speed-contact-sheet/id6785704702?l=en-GB&mt=12">Download on the Mac App Store</a>
+  </div>
+</div></section>
 
 <footer>
-  <div class="wrap">
-    © 2026 Luis Corona — Corona Apps ·
-    <a href="../index.html">Home</a> ·
-    <a href="support.html">Support</a> ·
-    <a href="privacy.html">Privacy</a>
-  </div>
+  <div style="font-size:22px;color:var(--ink);font-weight:600;letter-spacing:-.02em;margin-bottom:8px">Speed Contact Sheet</div>
+  <div><a href="/speedcontactsheet/privacy">Privacy</a><a href="/speedcontactsheet/terms">Terms</a><a href="/speedcontactsheet/support">Support</a></div>
+  <div style="margin-top:16px;color:#6f6a61">© 2026 Luis Corona</div>
 </footer>
 
+<script>
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
 </body>
 </html>
